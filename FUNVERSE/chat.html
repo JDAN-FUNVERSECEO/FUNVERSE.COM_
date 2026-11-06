@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#071a3a">
+  <meta name="description" content="Chat privado con tus amigos de FUNVERSE.">
+  <title>Amigos y chat · FUNVERSE</title>
+  <link rel="icon" href="/assets/funverse-astronaut.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/chat.css">
+  <script src="/chat.js" defer></script>
+</head>
+<body class="chat-page">
+  <header class="chat-topbar">
+    <a class="chat-brand" href="/" aria-label="Volver a FUNVERSE"><span class="chat-brand-icon">✦</span><span>FUN<span>VERSE</span></span></a>
+    <div class="chat-top-actions">
+      <span class="chat-account" id="chat-account-name">Conectando…</span>
+      <a class="chat-home-link" href="/">Inicio</a>
+      <button class="chat-logout" id="chat-logout" type="button" hidden>Salir</button>
+    </div>
+  </header>
+  <main class="chat-page-main">
+    <section class="chat-login-card" id="chat-login" hidden>
+      <span class="chat-login-icon">✉</span>
+      <h1>Tu espacio de amigos</h1>
+      <p>Inicia sesión con cualquier cuenta FUNVERSE para agregar amigos y conversar en privado.</p>
+      <a class="chat-primary-link" href="/#account-dialog">Iniciar sesión o crear cuenta</a>
+    </section>
+    <div class="chat-layout" id="chat-layout" hidden>
+      <aside class="chat-sidebar">
+        <div class="chat-sidebar-heading"><span class="chat-eyebrow">TU COMUNIDAD</span><h1>Amigos</h1><p>Agrega cuentas FUNVERSE por correo.</p></div>
+        <form class="chat-add-friend" id="friend-form">
+          <label for="friend-email">Correo de tu amigo</label>
+          <div><input id="friend-email" type="email" autocomplete="email" placeholder="amigo@ejemplo.com" required><button type="submit" aria-label="Enviar solicitud">+</button></div>
+          <small id="friend-status" role="status" aria-live="polite"></small>
+        </form>
+        <section class="chat-request-section"><h2>Solicitudes <span id="request-count">0</span></h2><div id="friend-requests" class="chat-request-list"><p class="chat-list-empty">No hay solicitudes nuevas.</p></div></section>
+        <section class="chat-friends-section"><h2>Conversaciones <span id="friend-count">0</span></h2><label class="chat-friend-search"><span>⌕</span><input id="friend-search" type="search" placeholder="Buscar amigo…" autocomplete="off"></label><div id="friend-list" class="chat-friend-list"><p class="chat-list-empty">Agrega un amigo para empezar.</p></div></section>
+        <div id="outgoing-requests" class="chat-outgoing" hidden></div>
+      </aside>
+      <section class="chat-conversation" aria-label="Conversación con amigos">
+        <div class="chat-empty-state" id="chat-empty"><span>✦</span><h2>Elige una conversación</h2><p>Envía una solicitud de amistad o selecciona a un amigo para empezar a hablar.</p></div>
+        <div class="chat-room" id="chat-room" hidden>
+          <header class="chat-room-header">
+            <img id="room-avatar" src="/assets/funverse-astronaut.svg" alt="">
+            <div><b id="room-name">Amigo</b><small id="room-email">Chat privado FUNVERSE</small></div>
+            <button class="chat-report-button" id="report-open" type="button">Denunciar</button>
+          </header>
+          <div class="chat-messages" id="chat-messages" role="log" aria-live="polite" aria-relevant="additions"></div>
+          <form class="chat-compose" id="message-form">
+            <label class="sr-only" for="message-text">Escribe un mensaje</label>
+            <textarea id="message-text" rows="1" maxlength="500" placeholder="Escribe un mensaje…" required></textarea>
+            <button type="submit" aria-label="Enviar mensaje">➤</button>
+          </form>
+          <p class="chat-send-status" id="message-status" role="status" aria-live="polite"></p>
+        </div>
+      </section>
+    </div>
+  </main>
+  <dialog class="chat-report-dialog" id="report-dialog" aria-labelledby="report-title">
+    <form id="report-form">
+      <div class="chat-report-heading"><div><span class="chat-eyebrow">SEGURIDAD FUNVERSE</span><h2 id="report-title">Denunciar cuenta</h2></div><button class="chat-report-close" id="report-close" type="button" aria-label="Cerrar">×</button></div>
+      <p id="report-target-label">Tu denuncia será privada y llegará al panel de moderación.</p>
+      <label>Motivo<select id="report-reason" required><option value="">Elige un motivo</option><option value="acoso">Acoso o bullying</option><option value="contenido">Contenido inapropiado</option><option value="suplantacion">Suplantación de identidad</option><option value="seguridad">Seguridad</option><option value="otro">Otro</option></select></label>
+      <label>¿Qué ocurrió?<textarea id="report-details" rows="4" maxlength="600" minlength="10" placeholder="Describe lo ocurrido sin compartir datos sensibles." required></textarea></label>
+      <button class="chat-primary-link" type="submit">Enviar denuncia</button>
+      <p class="chat-report-status" id="report-status" role="status" aria-live="polite"></p>
+    </form>
+  </dialog>
+</body>
+</html>
